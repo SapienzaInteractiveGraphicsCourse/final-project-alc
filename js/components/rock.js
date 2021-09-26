@@ -14,7 +14,7 @@ function rock1(scene, xPos, yPos){
     rockNormal.wrapS = THREE.RepeatWrapping;
     rockNormal.wrapT = THREE.RepeatWrapping;
 
-    const rockDisplacement = new THREE.TextureLoader().load("./assets/textures/roomD.jpg");
+    const rockDisplacement = new THREE.TextureLoader().load("./assets/textures/roomD.png");
     rockDisplacement.minFilter = THREE.LinearMipmapNearestFilter;
     rockDisplacement.magFilter = THREE.LinearFilter;
     rockDisplacement.wrapS = THREE.RepeatWrapping;
@@ -47,7 +47,7 @@ function rock2(scene, xPos, yPos){
     rockNormal.wrapS = THREE.RepeatWrapping;
     rockNormal.wrapT = THREE.RepeatWrapping;
 
-    const rockDisplacement = new THREE.TextureLoader().load("./assets/textures/rockD.jpg");
+    const rockDisplacement = new THREE.TextureLoader().load("./assets/textures/rockD.png");
     rockDisplacement.minFilter = THREE.LinearMipmapNearestFilter;
     rockDisplacement.magFilter = THREE.LinearFilter;
     rockDisplacement.wrapS = THREE.RepeatWrapping;
