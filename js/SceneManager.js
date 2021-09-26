@@ -30,7 +30,7 @@ function SceneManager(canvas) {
     const sound = new THREE.Audio( listener );
 
     const audioLoader = new THREE.AudioLoader();
-    audioLoader.load( '././assets/utils/ambient.ogg', function( buffer ) {
+    audioLoader.load( './assets/utils/ambient.ogg', function( buffer ) {
 	sound.setBuffer( buffer );
 	sound.setLoop( true );
 	sound.setVolume( 0.5 );
