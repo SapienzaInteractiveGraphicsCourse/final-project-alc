@@ -1,4 +1,4 @@
-function room(scene, screenDimensions){
+function room(scene){
 
     const roomWidth = 30;
     const roomHeight = 30;
@@ -6,26 +6,12 @@ function room(scene, screenDimensions){
     
     const geometry = new THREE.BoxGeometry(roomWidth, roomHeight, roomDepth, 128, 128, 128);
 
-    const floorTextureColor = new THREE.TextureLoader().load("./assets/textures/roomC.jpg");
+    const floorTextureColor = new THREE.TextureLoader().load("./assets/textures/FloorS.jpg");
     floorTextureColor.minFilter = THREE.LinearMipmapNearestFilter;
     floorTextureColor.magFilter = THREE.LinearFilter;
     floorTextureColor.wrapS = THREE.RepeatWrapping;
     floorTextureColor.wrapT = THREE.RepeatWrapping;
     floorTextureColor.repeat.set(2, 2);
-
-    const floorTextureNorm = new THREE.TextureLoader().load("./assets/textures/roomN.jpg");
-    floorTextureNorm.minFilter = THREE.LinearMipmapNearestFilter;
-    floorTextureNorm.magFilter = THREE.LinearFilter;
-    floorTextureNorm.wrapS = THREE.RepeatWrapping;
-    floorTextureNorm.wrapT = THREE.RepeatWrapping;
-    floorTextureNorm.repeat.set(2, 2);
-
-    const floorTextureDisp = new THREE.TextureLoader().load("./assets/textures/roomD.png");
-    floorTextureDisp.minFilter = THREE.LinearMipmapNearestFilter;
-    floorTextureDisp.magFilter = THREE.LinearFilter;
-    floorTextureDisp.wrapS = THREE.RepeatWrapping;
-    floorTextureDisp.wrapT = THREE.RepeatWrapping;
-    floorTextureDisp.repeat.set(2, 2);
 
     const leftsideTextureColor = new THREE.TextureLoader().load("./assets/textures/roomC.jpg");
     leftsideTextureColor.minFilter = THREE.LinearMipmapNearestFilter;
@@ -128,40 +114,37 @@ function room(scene, screenDimensions){
         new THREE.MeshPhongMaterial({
             map: rightsideTextureColor,
             normalMap: leftsideTextureNorm,
-            shininess: 5,
+            shininess: 2,
             displacementMap: rightsideTextureDisp,
-            displacementBias: -0.8,
+            displacementBias: -0.85,
             side: THREE.BackSide}),
         new THREE.MeshPhongMaterial({
             map: leftsideTextureColor, 
             normalMap: rightsideTextureNorm,
-            shininess: 5,
+            shininess: 2,
             displacementMap: leftsideTextureDisp,
-            displacementBias: -0.8,
+            displacementBias: -0.85,
             side: THREE.BackSide}),
         new THREE.MeshPhongMaterial({
             map: exitTextureColor, 
             normalMap: exitTextureNormal,
-            shininess: 5,
+            shininess: 2,
             displacementMap: exitTextureDisp,
-            displacementBias: -0.8,
+            displacementBias: -0.85,
             side: THREE.BackSide}),
         new THREE.MeshPhongMaterial({
             map: entryTextureColor, 
             normalMap: entryTextureNorm,
-            shininess: 5,
+            shininess: 2,
             displacementMap: entryTextureDisp,
-            displacementBias: -0.8,
+            displacementBias: -0.85,
             side: THREE.BackSide}),
         new THREE.MeshPhongMaterial({
             map: ceilingTextureColor, 
             side: THREE.BackSide}),
         new THREE.MeshPhongMaterial({
             map: floorTextureColor,
-            normalMap: floorTextureNorm,
-            shininess: 5,
-            displacementMap: floorTextureDisp,
-            displacementBias: -0.8,
+            shininess: 2,
             side: THREE.BackSide}),
     ];
 
@@ -170,5 +153,7 @@ function room(scene, screenDimensions){
 	room.position.y = 5.5;
 
 	scene.add(room);
+    
+    
 
 }

@@ -4,44 +4,34 @@ function SceneManager(canvas) {
         width: canvas.width,
         height: canvas.height
     };
-    
+
+    let keyMap = [];
+    const rockMap = [
+        0.0, -2.0,
+        -10.0, -5.0,
+        -8.0, 7.5,
+        10.0, 4.5,
+        8.0, 19.0,
+        0.0, 15.0,
+        -3.0, 19.0,
+        13.5, -4.5,
+        3.0, -7.5,
+        5.5, 0.0
+    ];
+    theRocks = [];
+
     const scene = buildScene();
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
 
-    lightcolor = '#ff7510';
+    lightcolor = '#ffffff';
 
-    const lightRightUp = new THREE.PointLight(lightcolor, 4, 20, 2);
-    lightRightUp.position.set(-13.0, 5.5+7.5, 1);
-    scene.add(lightRightUp);
+    const lightCentral = new THREE.AmbientLight(lightcolor, 2);
+    scene.add(lightCentral);
 
-    const lightLeftUp = new THREE.PointLight(lightcolor, 4, 20, 2);
-    lightLeftUp.position.set(13.0, 5.5+7.5, 1);
-    scene.add(lightLeftUp);
-
-    const lightRightDown = new THREE.PointLight(lightcolor, 4, 20, 2);
-    lightRightDown.position.set(-13.0, 5.5-7.5, 1);
-    scene.add(lightRightDown);
-
-    const lightLeftDown = new THREE.PointLight(lightcolor, 4, 20, 2);
-    lightLeftDown.position.set(13.0, 5.5-7.5, 1);
-    scene.add(lightLeftDown);    
-    
-    const lightUpRight = new THREE.PointLight(lightcolor, 4, 20, 2);
-    lightUpRight.position.set(7.5, 5.5+13.0, 1);
-    scene.add(lightUpRight);
-
-    const lightUpLeft = new THREE.PointLight(lightcolor, 4, 20, 2);
-    lightUpLeft.position.set(-7.5, 5.5+13.0, 1);
-    scene.add(lightUpLeft);
-
-    const lightDownRight = new THREE.PointLight(lightcolor, 4, 20, 2);
-    lightDownRight.position.set(7.5, 5.5-13.0, 1);
-    scene.add(lightDownRight);
-
-    const lightDownLeft = new THREE.PointLight(lightcolor, 4, 20, 2);
-    lightDownLeft.position.set(-7.5, 5.5-13.0, 1);
-    scene.add(lightDownLeft);
+    const lightShades = new THREE.PointLight(lightcolor, 1);
+    lightShades.position.set(0, 5.5, 10);
+    scene.add(lightShades);
 
     createSceneSubjects();
 
@@ -61,26 +51,26 @@ function SceneManager(canvas) {
     }
 
     function buildCamera({ width, height }) {
-
+        
         const fov = 80;
         const aspect = width/height;
         const near = 0.1;
         const far = 500;
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+        camera.position.set(0.0, -12.0, 0.0);
         camera.position.set(0.0, 0.0, 19.0);
+        camera.lookAt(0.0, -7.5, 0);
         camera.lookAt(0, 4, -2.5);
-
         return camera;
     }
 
     function createSceneSubjects() {
-        theRoom = new room(scene, screenDimensions);
-        //theSpaceship  = new Spaceship(scene);
-        //dynamicSubjects.push(theSpaceship);
-    }
-
-    this.update = function() {
-        renderer.render(scene, camera);
+        theRoom = new room(scene);
+        for(let i = 0; i < rockMap.length; i+=2){
+            if(i == 0 || i==4 || i==8 || i == 10) theRocks.push(new rock1(scene, rockMap[i], rockMap[i+1]));
+            else theRocks.push(new rock2(scene, rockMap[i], rockMap[i+1]));
+        }
+        thePlayer  = new player(scene, rockMap, rockMap.length);
     }
 
     this.onWindowResize = function() {
@@ -97,4 +87,15 @@ function SceneManager(canvas) {
         camera.bottom = -height / 2;
         camera.updateProjectionMatrix();      
     }
+
+    this.update = function() {
+            thePlayer.handleInput(keyMap, camera);
+            renderer.render(scene, camera);
+    }
+    
+    this.handleInput = function(keyCode, isDown) {
+        keyMap[keyCode] = isDown;
+    }
+
+
 }
