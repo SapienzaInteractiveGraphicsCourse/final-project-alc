@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Victory!</title>
+    <style>
+        body {
+            background-image: url("assets/utils/victory.png ");
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/win.css" />
+</head>
+
+<body>
+
+    <script>
+        function Home() {
+            window.location.href = "./lindex.html";
+        }
+        function Restart() {
+            window.location.href = "./game.html";
+        }
+    </script>
+
+    <div id="login">
+        <h1>You won!</h1>
+        <button class="home" onclick="Home()">Home</button>
+        <button class="res" onclick="Restart()">Restart</button>
+    </div>
+    
+</body>
+</html>

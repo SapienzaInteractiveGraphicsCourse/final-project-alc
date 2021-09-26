@@ -24,7 +24,7 @@ function SceneManager(canvas) {
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
 
-    lightcolor = '#ffffff';
+    lightcolor = '#ffeeee';
 
     const lightCentral = new THREE.AmbientLight(lightcolor, 2);
     scene.add(lightCentral);
@@ -34,6 +34,8 @@ function SceneManager(canvas) {
     scene.add(lightShades);
 
     createSceneSubjects();
+
+
 
     function buildScene() {
         const scene = new THREE.Scene();
@@ -89,7 +91,7 @@ function SceneManager(canvas) {
     }
 
     this.update = function() {
-            thePlayer.handleInput(keyMap, camera);
+            thePlayer.handleInput(keyMap);
             renderer.render(scene, camera);
     }
     

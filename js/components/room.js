@@ -4,6 +4,10 @@ function room(scene){
     const roomHeight = 30;
     const roomDepth = 5;
     
+    const doorWidht = 4;
+    const doorHeight = 1;
+    const doorDepth = 4;
+
     const geometry = new THREE.BoxGeometry(roomWidth, roomHeight, roomDepth, 128, 128, 128);
 
     const floorTextureColor = new THREE.TextureLoader().load("./assets/textures/FloorS.jpg");
@@ -154,6 +158,16 @@ function room(scene){
 
 	scene.add(room);
     
-    
+    doorGeo = new THREE.BoxGeometry(doorWidht, doorHeight, doorDepth);
+    doorMat = new THREE.MeshBasicMaterial({color:0x000000});
+    door = new THREE.Mesh(doorGeo,doorMat);
+    door.position.set(0.0, 15.1, -0.5);
+    room.add(door);
+
+    winSpotGeo = new THREE.PlaneGeometry(3.0, 3.0);
+    winSpotMat = new THREE.MeshBasicMaterial({color:0x00ff00});
+    winSpot = new THREE.Mesh(winSpotGeo, winSpotMat);
+    winSpot.position.set(0.0, 13.0, -2.4);
+    room.add(winSpot);
 
 }
